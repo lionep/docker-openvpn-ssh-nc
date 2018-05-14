@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+
+if [[ "$SSH_AUTHORIZED_KEYS" != "" ]]; then
+  mkdir /root/.ssh
+  echo -e "$SSH_AUTHORIZED_KEYS" > /root/.ssh/authorized_keys
+fi

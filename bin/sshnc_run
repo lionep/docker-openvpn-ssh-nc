@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ ! -f "/etc/ssh/ssh_host_rsa_key" ]]; then
+  sshnc_init
+fi
+
+# Run ssh server
+/usr/sbin/sshd -o HostKey=/etc/ssh/ssh_host_rsa_key -o Port=$SSH_PORT -o ListenAddress=0.0.0.0 -o PermitRootLogin=Yes -o AuthorizedKeysFile=.ssh/authorized_keys
+
+# Run standard openvpn
+ovpn_run $@
